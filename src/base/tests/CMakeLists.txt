@@ -1,0 +1,5 @@
+add_executable(test_string_utils TestStringUtils.cpp)
+target_link_libraries(test_string_utils base)
+
+add_executable(test_ttime TestTTime.cpp)
+target_link_libraries(test_ttime base)

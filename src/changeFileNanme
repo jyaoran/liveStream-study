@@ -1,0 +1,44 @@
+###
+ # @Author: jiangshan yaoranyaoran2015@outlook.com
+ # @Date: 2025-06-25 15:51:29
+ # @LastEditors: jiangshan yaoranyaoran2015@outlook.com
+ # @LastEditTime: 2025-06-25 16:03:38
+ # @FilePath: /liveStream-study/src/changeFileNanme
+ # @Description: 
+ # 
+ # Copyright (c) 2025 by jiangshan yaoranyaoran2015@outlook.com, All Rights Reserved. 
+### 
+#!/bin/bash
+
+# 进入项目根目录
+cd "$1" || exit
+
+# 查找所有小写字母开头的文件并重命名#!/bin/bash
+
+# 检查是否提供了目录参数
+if [ -z "$1" ]; then
+    echo "Usage: $0 <directory>"
+    exit 1
+fi
+
+# 查找所有小写字母开头的文件并重命名
+find . -type f -exec bash -c '
+    for file; do
+        # 获取文件名和目录路径 
+        filename=$(basename "$file") 
+        dirname=$(dirname "$file")
+        
+        # 检查文件名是否以小写字母开头
+        if [[ $filename =~ ^[a-z] ]]; then
+            # 构建新的文件名（首字母大写）
+            new_filename=$(echo "$filename" | awk "{print toupper(substr(\$0, 1, 1)) substr(\$0, 2)}")
+            
+            # 重命名文件
+            mv "$file" "$dirname/$new_filename"
+            echo "Renamed: $file -> $dirname/$new_filename"
+        fi
+    done
+' bash {} +
+
+
+
