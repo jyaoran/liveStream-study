@@ -77,23 +77,23 @@ void testEventLoopThreadPool()
 
     pool.Start();
 
-    std::cout << "thread id : "<< std::this_thread::get_id() << std::endl;
+    LOG(INFO) << "thread id : "<< std::this_thread::get_id();
 
     std::vector<EventLoop*> list = pool.getLoops();
 
     for(auto &e : list)
     {
         // 打印不同的线程loop
-        // std::cout << "loop : " << e << std::endl;   
+        // LOG(INFO) << "loop : " << e;   
         e->runInLoop([&e](){
-            std::cout << "loop : " << e << "   this id = " << std::this_thread::get_id() << std::endl; 
+            LOG(INFO) << "loop : " << e << "   this id = " << std::this_thread::get_id(); 
         });
     }
 
     EventLoop* loop = pool.getNextLoop();
-    std::cout << "loop : " << loop << std::endl; 
+    LOG(INFO) << "loop : " << loop; 
     loop = pool.getNextLoop();
-    std::cout << "loop : " << loop << std::endl; 
+    LOG(INFO) << "loop : " << loop; 
 }
 
 void TestTimingWheelInThreadLoop()

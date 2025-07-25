@@ -45,9 +45,9 @@ int main()
         
         // 测试OnRead，收到什么发回什么,echo服务器
         server->setOnMessageCallback([&server](const UdpSocketPtr& con, const InetAddress &addr, MsgBuffer &buf){
-            std::cout << "host : " << addr.toIpPort() << " \nmsg : "<< buf.Peek() << std::endl;
+            LOG(INFO) << "host : " << addr.toIpPort() << " \nmsg : "<< buf.Peek();
             char buffer[1024];
-            std::cout << "input: ";
+            LOG(INFO) << "input: ";
             std::cin >> buffer;
             struct sockaddr_in6 saddr;
             socklen_t len = sizeof(saddr);
@@ -60,14 +60,14 @@ int main()
         server->setCloseConnectionCallback([](const UdpSocketPtr & con){
             if(con)
             {
-                std::cout << "host: "<< con->getPeerAddress().toIpPort() << " closed" << std::endl;
+                LOG(INFO) << "host: "<< con->getPeerAddress().toIpPort() << " closed";
             }
         });
         
         server->setWriteCompleteCallback([](const UdpSocketPtr& con){
             if(con)
             {
-                std::cout << "host: "<< con->getPeerAddress().toIpPort() << " write complete" << std::endl;
+                LOG(INFO) << "host: "<< con->getPeerAddress().toIpPort() << " write complete";
             }
         });
         

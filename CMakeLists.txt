@@ -4,7 +4,20 @@ PROJECT(liveStream)
 
 SET(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/bin)
 
-# SET(CMAKE_CXX_STANDARD 11)
+include_directories(${PROJECT_SOURCE_DIR}/lib/jsoncpp/include/) # 添加查找的include路径
+link_directories(${PROJECT_SOURCE_DIR}/lib/jsoncpp/lib64/)  # 添加查找lib的路径
+link_directories(${PROJECT_SOURCE_DIR}/lib/jsoncpp/lib/)
+
+include_directories(${PROJECT_SOURCE_DIR}/lib/libsrtp/include/)
+link_directories(${PROJECT_SOURCE_DIR}/lib/libsrtp/lib/)
+
+include_directories(${PROJECT_SOURCE_DIR}/lib/faad2/include/)
+link_directories(${PROJECT_SOURCE_DIR}/lib/faad2/lib/)
+
+include_directories(${PROJECT_SOURCE_DIR}/lib/opus/include/)
+link_directories(${PROJECT_SOURCE_DIR}/lib/opus/lib/)
+
+SET(CMAKE_CXX_STANDARD 11)
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -O0 \
         -Wno-unused-variable -lrt -pthread")

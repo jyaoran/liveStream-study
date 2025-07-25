@@ -44,28 +44,28 @@ int main()
         std::shared_ptr<UdpClient> client = std::make_shared<UdpClient>(loop, server);
         
         client->setOnMessageCallback([](const UdpSocketPtr& con, const InetAddress &addr, MsgBuffer &buf){
-            std::cout << "host : " << addr.toIpPort() << " \nmsg : "<< buf.Peek() << std::endl;
+            LOG(INFO) << "host : " << addr.toIpPort() << " \nmsg : "<< buf.Peek();
             buf.RetrieveAll();
         });
 
         client->setCloseConnectionCallback([](const UdpSocketPtr & con){
             if(con)
             {
-                std::cout << "host: "<< con->getPeerAddress().toIpPort() << " closed" << std::endl;
+                LOG(INFO) << "host: "<< con->getPeerAddress().toIpPort() << " closed";
             }
         });
         
         client->setWriteCompleteCallback([](const UdpSocketPtr& con){
             if(con)
             {
-                std::cout << "host: "<< con->getPeerAddress().toIpPort() << " write complete" << std::endl;
+                LOG(INFO) << "host: "<< con->getPeerAddress().toIpPort() << " write complete";
             }
         });
 
         client->setConnectionCallback([&client](const UdpSocketPtr& con, bool connected){
             if(connected)
             {
-                std::cout << "host: " << con->getPeerAddress().toIpPort() << " connected." << std::endl;
+                LOG(INFO) << "host: " << con->getPeerAddress().toIpPort() << " connected.";
                 client->send("1111", strlen("1111"));
             }
         });

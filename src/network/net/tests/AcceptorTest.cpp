@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-06-27 16:51:32
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-06-27 17:08:12
+ * @LastEditTime: 2025-07-21 22:36:43
  * @FilePath: /liveStream-study/src/network/net/tests/AcceptorTest.cpp
  * @Description: 
  * @
@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
     InetAddress server("127.0.0.1:34444");
     std::shared_ptr<Acceptor> acceptor = std::make_shared<Acceptor>(&loop, server); 
     acceptor->setAcceptCallback([](int fd, const InetAddress &addr){
-        std::cout << "host : " << addr.toIpPort() << std::endl;
+        LOG(INFO) << "host : " << addr.toIpPort();
     });
 
     acceptor->Start();
@@ -51,7 +51,7 @@ int main(int argc, char const *argv[])
         InetAddress server("127.0.0.1:34444");
         std::shared_ptr<Acceptor> acceptor = std::make_shared<Acceptor>(loop, server); 
         acceptor->setAcceptCallback([](int fd, const InetAddress &addr){
-            std::cout << "host : " << addr.toIpPort() << std::endl;
+            LOG(INFO) << "host : " << addr.toIpPort();
         });
         acceptor->Start();
     }

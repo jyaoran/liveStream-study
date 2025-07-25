@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-07-21 16:27:58
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-21 16:41:55
+ * @LastEditTime: 2025-07-25 13:35:07
  * @FilePath: /liveStream-study/src/mmedia/rtmp/RtmpContext.h
  * @Description: 
  * @
@@ -28,7 +28,7 @@ namespace liveStream
         {
             kRtmpHandShake = 0, // 收到S0S1S2之后转换成下一个状态
             kRtmpWatingDone = 1,// 发送C2状态下一个
-            kRtmpMessage = 2,   // 握手接受，数据传输
+            kRtmpMessage = 2,   // 握手完成，数据传输
         };
 
         // 枚举定义不同的 用户RTMP 事件类型

@@ -3,7 +3,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-07-21 16:27:42
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-21 18:55:42
+ * @LastEditTime: 2025-07-23 16:21:55
  * @FilePath: /liveStream-study/src/mmedia/rtmp/RtmpHandShake.cpp
  * @Description:
  * @
@@ -181,7 +181,7 @@ int32_t RtmpHandShake::HandShake(MsgBuffer &buf)
             {
                 return 1;
             }
-            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",Recv C0C1\n";
+            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",Recv C0C1";
             // 数据够了
             auto offset = CheckC1S1(buf.Peek(), 1537);
             if(offset >= 0) // 检测成功
@@ -205,17 +205,17 @@ int32_t RtmpHandShake::HandShake(MsgBuffer &buf)
             {
                 return 1;
             }
-            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ", Recv C2\n";
+            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ", Recv C2";
             if(CheckC2S2(buf.Peek(), 1536))
             {
                 buf.Retrieve(1536);
-                RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ", handshake done\n";
+                RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ", handshake done";
                 state_ = kHandShakeDone; // 完成
                 return 0;
             }
             else
             {
-                RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ", check C2 error\n";        
+                RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ", check C2 error";        
                 return -1;
             }
             break;
@@ -226,7 +226,7 @@ int32_t RtmpHandShake::HandShake(MsgBuffer &buf)
             {
                 return 1;
             }
-            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",Recv S0S1.\n";
+            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",Recv S0S1.";
             // 数据够了
             auto offset = CheckC1S1(buf.Peek(), 1537);
             if(offset >= 0) // 检测成功
@@ -241,7 +241,7 @@ int32_t RtmpHandShake::HandShake(MsgBuffer &buf)
                 {
                     // S2一起接收到了，状态改变位即将结束的状态
                     // 并不对S2进行任何处理，所以直接进入done状态
-                    RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",Recv S2.\n";
+                    RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",Recv S2.";
                     state_ = kHandShakeDoning;  
                     buf.Retrieve(1536);
                     // 发送C2完成后，会将状态置为done
@@ -258,7 +258,7 @@ int32_t RtmpHandShake::HandShake(MsgBuffer &buf)
             }
             else
             {
-                RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",check S0S1 error\n";
+                RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",check S0S1 error.";
                 return -1;
             }
             break;
@@ -276,24 +276,30 @@ void RtmpHandShake::WriteComplete()
             // 发送S2
             state_ = kHandShakePostS2;
             SendC2S2();
-            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",send C2\n";
+            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",Wait C2.";
             break;
         }
         case kHandShakePostS2:      // 服务端状态，服务端发送完成S2，等待客户端的C2
         {
-            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",send S2\n";
+            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",send S2 cpmplete.";
             state_ = kHandShakeWaitC2; // 等待客户端的C2
             break;
         }
         case kHandShakePostC0C1:    // 客户端状态， 发送完C0C1，等待服务端的S0S1
         {
             state_ = kHandShakeWaitS0S1; // 等待服务端的S0S1
-            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",wait S0S1\n";
+            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",wait S0S1.";
+            break;
+        }
+        case kHandShakePostC2:          // 客户端收到S0S1之后，但是没有连续收到S2，就变为PostC2完成状态 。客户端PostC2就完成
+        {
+            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",Post C2.done";
+            state_ = kHandShakeDone;
             break;
         }
         case kHandShakeDoning:
         {
-            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",wait S0S1\n";
+            RTMP_TRACE << "host : " << connection_->getPeerAddress().toIpPort() << ",wait S0S1.";
             state_ = kHandShakeDone; // 完成
             break;
         }

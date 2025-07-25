@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-06-23 14:57:33
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-13 18:10:48
+ * @LastEditTime: 2025-07-23 16:04:47
  * @FilePath: /liveStream-study/src/network/net/EventLoop.cpp
  * @Description: 
  * @
@@ -241,7 +241,7 @@ void liveStream::network::EventLoop::assertInLoopThread() const
 
 bool liveStream::network::EventLoop::isInLoopThread() const
 {
-    LOG(INFO) << "isInLoopThread = " << t_loopInThisThread << ", this = " << this;
+    // LOG(INFO) << "isInLoopThread = " << t_loopInThisThread << ", this = " << this;
     return t_loopInThisThread == this;
 }
 

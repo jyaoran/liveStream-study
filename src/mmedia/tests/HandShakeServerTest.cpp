@@ -1,38 +1,40 @@
 /********************************************************************
  * @Author: jiangshan yaoranyaoran2015@outlook.com
- * @Date: 2025-07-11 14:23:10
+ * @Date: 2025-07-21 22:08:50
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-11 14:26:58
- * @FilePath: /liveStream-study/src/network/net/tests/TcpServerTest.cpp
+ * @LastEditTime: 2025-07-21 22:38:53
+ * @FilePath: /liveStream-study/src/mmedia/tests/HandShakeServerTest.cpp
  * @Description: 
  * @
  * @Copyright (c) 2025 by jiangshan yaoranyaoran2015@outlook.com, All Rights Reserved. 
  *********************************************************************/
-#include "network/net/Acceptor.h"
 #include "network/net/EventLoop.h"
 #include "network/net/EventLoopThread.h"
 #include "network/base/InetAddress.h"
 #include "network/TcpServer.h"
-#include "network/TestContext.h"
+#include "mmedia/rtmp/RtmpHandShake.h"
 #include "base/easylogging++.h"
-
 #include <iostream>
 #include <thread>
 #include <chrono>
 
+
+
 using namespace liveStream::network;
 using namespace liveStream::base;
+using namespace liveStream::mm;
+
+INITIALIZE_EASYLOGGINGPP
 
 EventLoopThread eventloop_thread;
 std::thread th;
-using TestContextPtr = std::shared_ptr<TestContext>;
+using RtmpHandShakePtr = std::shared_ptr<RtmpHandShake>;
 
-INITIALIZE_EASYLOGGINGPP
+
 
 const char *http_response = "HTTP/1.0 200 OK\r\nServer: tmms\r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n";
 int main()
 {
-
     el::Configurations conf("/home/yaoran/3dPart/logConf/my-conf.conf");
     el::Loggers::reconfigureLogger("default", conf);
     el::Loggers::reconfigureAllLoggers(conf);
@@ -43,25 +45,27 @@ int main()
 
     if(loop)
     {
-        InetAddress listen("0.0.0.0:34444");
+        InetAddress listen("127.0.0.1:1935");
         TcpServer server(loop, listen);
 
         // 设置收到消息回调，直接解析消息的上下文
         server.setMessageCallback([](const TcpConnectionPtr& con, MsgBuffer &buf){
-            TestContextPtr context = con->getContext<TestContext>(kNormalContext);
-            context->ParseMessage(buf);
+            RtmpHandShakePtr shake = con->getContext<RtmpHandShake>(kNormalContext);
+            // 每次收到消息就进行回调
+            shake->HandShake(buf);
         });
 
         // 设置有新连接的时候，设置上下文到conn上，设置上下文解析完成之后的回调
         server.setNewConnectionCallback([&loop](const TcpConnectionPtr &con){
-            TestContextPtr context = std::make_shared<TestContext>(con);
-            con->setContext(kNormalContext, context);
-            context->SetTestMessageCallback([](const TcpConnectionPtr& con, const std::string &msg){
-                LOG(INFO) << "message : "<< msg;
-            });
+            RtmpHandShakePtr shake = std::make_shared<RtmpHandShake>(con, false);
+            con->setContext(kNormalContext, shake);
+            // 开始服务端等待C0C1
+            shake->Start();
             con->setWriteCompleteCallback([&loop](const TcpConnectionPtr& con){
                 LOG(INFO) << "write complete host： " << con->getPeerAddress().toIpPort();
-                // con->ForceClose();
+                RtmpHandShakePtr shake = con->getContext<RtmpHandShake>(kNormalContext);
+                // 驱动状态机，每次写完都会启动这个回调
+                shake->WriteComplete();
             });
         });
 

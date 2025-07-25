@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-07-10 22:29:04
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-10 23:12:49
+ * @LastEditTime: 2025-07-21 22:39:26
  * @FilePath: /liveStream-study/src/network/net/tests/SocketOptTest.cpp
  * @Description:
  * @
@@ -41,9 +41,9 @@ void testClient()
     opt.setNonBlocking(false);
     int ret = opt.connect(serverAddr);
 
-    LOG(INFO) << "connect ret " << ret << " errno : " << errno << std::endl 
-            << "local addr : " << opt.getLocalAddress()->toIpPort() << std::endl 
-            << "peer addr : " << opt.getPeerAddress()->toIpPort() << std::endl;
+    LOG(INFO) << "connect ret " << ret << " errno : " << errno 
+            << "local addr : " << opt.getLocalAddress()->toIpPort() 
+            << "peer addr : " << opt.getPeerAddress()->toIpPort();
 }
     
 void testServer()
