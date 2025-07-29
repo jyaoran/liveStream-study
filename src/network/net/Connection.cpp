@@ -70,7 +70,7 @@ void liveStream::network::Connection::setActiveCallback(ActiveCallback &&cb)
     m_activeCallback = std::move(cb);
 }
 
-void liveStream::network::Connection::activa()
+void liveStream::network::Connection::Active()
 {
     if (!m_active.load()) // atomic.load() 作用是获取原子变量的值，而不修改它
     {
@@ -85,7 +85,7 @@ void liveStream::network::Connection::activa()
     
 }
 
-void liveStream::network::Connection::deactivate()
+void liveStream::network::Connection::deactive()
 {
     m_active.store(false); // atomic.store() 作用是修改原子变量的值
 }

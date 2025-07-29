@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-06-16 13:46:15
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-25 16:18:15
+ * @LastEditTime: 2025-07-25 23:18:35
  * @FilePath: /liveStream-study/src/mmedia/tests/RtmpClientTest.cpp
  * @Description: 
  * @
@@ -15,6 +15,7 @@
 #include "mmedia/rtmp/RtmpClient.h"
 #include "network/TcpClient.h"
 #include "base/easylogging++.h"
+#include "base/Config.h"
 
 #include <iostream>
 #include <thread>
@@ -63,11 +64,11 @@ class RtmpHandlerImpl : public RtmpHandler
         } // 连接断开的时候，业务层可以回收资源，注销用户等
         void OnRecv(const TcpConnectionPtr& conn, const PacketPtr &data) override
         {
-            std::cout << "recv type:" << data->PacketType() << " size:" << data->PacketSize() << std::endl;
+            LOG(INFO) << "recv type:" << data->PacketType() << " size:" << data->PacketSize();
         }// 多媒体解析出来的数据，传给直播业务
         void OnRecv(const TcpConnectionPtr& conn, PacketPtr &&data) override
         {
-            std::cout << "recv type:" << data->PacketType() << " size:" << data->PacketSize() << std::endl;
+            LOG(INFO) << "recv type:" << data->PacketType() << " size:" << data->PacketSize();
         }
         void OnActive(const ConnectionPtr &conn) override
         {
@@ -80,6 +81,15 @@ int main()
     el::Configurations conf("/home/yaoran/3dPart/logConf/my-conf.conf");
     el::Loggers::reconfigureLogger("default", conf);
     el::Loggers::reconfigureAllLoggers(conf);
+
+    // if(!sConfigMgr->LoadConfig("../config/config.json"))
+    // {
+    //     std::cerr << "load config file failed.";
+    //     return -1;
+    // }
+    
+    // Config::ptr config = sConfigMgr->GetConfig();
+
 
     eventloop_thread.run();
     EventLoop* loop = eventloop_thread.loop();

@@ -1,0 +1,27 @@
+{
+    "domain":
+    {
+        "name" : "127.0.0.1",
+        "type" : "publish",
+        "app" :
+        [
+            {
+                "name" : "live",
+                "max_buffer" : 1000,
+                "hls_support" : "on",
+                "flv_support" : "on",
+                "rtmp_support" : "on",
+                "content_latency" : 3,
+                "pull":
+                [
+                    {
+                        "protocol" : "rtmp",
+                        "host" : "127.0.0.1:1936",
+                        "interval" : 1,
+                        "max_retry" : 2
+                    }
+                ]
+            }
+        ]
+    }
+}

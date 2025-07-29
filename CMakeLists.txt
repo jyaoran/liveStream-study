@@ -3,6 +3,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 PROJECT(liveStream)
 
 SET(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/sbin) # 设置可执行文件存放位置，放在项目同级的bin下
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib) # 设置静态库存放位置
 
 include_directories(${PROJECT_SOURCE_DIR}/lib/jsoncpp/include/) # 添加查找的include路径
 link_directories(${PROJECT_SOURCE_DIR}/lib/jsoncpp/lib64/)  # 添加查找lib的路径

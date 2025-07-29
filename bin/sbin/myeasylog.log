@@ -1,0 +1,84 @@
+2025-07-25 23:15:45,832 DEBUG [default] [yaoran@unknown-host] [bool liveStream::base::ConfigMgr::LoadConfig(const std::string&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:249] load config file:../config/config.json
+2025-07-25 23:15:45,832 DEBUG [default] [yaoran@unknown-host] [bool liveStream::base::Config::LoadConfig(const std::string&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:30] config file : ../config/config.json
+2025-07-25 23:15:45,832 INFO [default] 
+service info addr:0.0.0.0
+port:1935
+protocol:rtmp
+transport:tcp
+2025-07-25 23:15:45,832 INFO [default] 
+service info addr:0.0.0.0
+port:8080
+protocol:http
+transport:tcp
+2025-07-25 23:15:45,832 INFO [default] 
+service info addr:0.0.0.0
+port:8081
+protocol:http
+transport:webrtc
+2025-07-25 23:15:45,832 INFO [default] 
+service info addr:0.0.0.0
+port:22000
+protocol:webrtc
+transport:udp
+2025-07-25 23:15:45,832 TRACE [default] [bool liveStream::base::Config::ParseDirectory(const Json::Value&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:157] ParseDirectory path:../config/publish/heart.com.json
+2025-07-25 23:15:45,833 TRACE [default] [bool liveStream::base::Config::ParseDirectory(const Json::Value&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:159] ret:-1 errno:2
+2025-07-25 23:17:35,537 DEBUG [default] [yaoran@unknown-host] [bool liveStream::base::ConfigMgr::LoadConfig(const std::string&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:249] load config file:../config/config.json
+2025-07-25 23:17:35,537 DEBUG [default] [yaoran@unknown-host] [bool liveStream::base::Config::LoadConfig(const std::string&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:30] config file : ../config/config.json
+2025-07-25 23:17:35,538 INFO [default] 
+service info addr:0.0.0.0
+port:1935
+protocol:rtmp
+transport:tcp
+2025-07-25 23:17:35,538 INFO [default] 
+service info addr:0.0.0.0
+port:8080
+protocol:http
+transport:tcp
+2025-07-25 23:17:35,538 INFO [default] 
+service info addr:0.0.0.0
+port:8081
+protocol:http
+transport:webrtc
+2025-07-25 23:17:35,538 INFO [default] 
+service info addr:0.0.0.0
+port:22000
+protocol:webrtc
+transport:udp
+2025-07-25 23:17:35,538 TRACE [default] [bool liveStream::base::Config::ParseDirectory(const Json::Value&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:157] ParseDirectory path:../config/publish/heart.com.json
+2025-07-25 23:17:35,538 TRACE [default] [bool liveStream::base::Config::ParseDirectory(const Json::Value&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:159] ret:-1 errno:2
+2025-07-25 23:18:56,931 DEBUG [default] [yaoran@unknown-host] [bool liveStream::base::ConfigMgr::LoadConfig(const std::string&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:249] load config file:../config/config.json
+2025-07-25 23:18:56,931 DEBUG [default] [yaoran@unknown-host] [bool liveStream::base::Config::LoadConfig(const std::string&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:30] config file : ../config/config.json
+2025-07-25 23:18:56,931 INFO [default] 
+service info addr:0.0.0.0
+port:1935
+protocol:rtmp
+transport:tcp
+2025-07-25 23:18:56,931 INFO [default] 
+service info addr:0.0.0.0
+port:8080
+protocol:http
+transport:tcp
+2025-07-25 23:18:56,931 INFO [default] 
+service info addr:0.0.0.0
+port:8081
+protocol:http
+transport:webrtc
+2025-07-25 23:18:56,931 INFO [default] 
+service info addr:0.0.0.0
+port:22000
+protocol:webrtc
+transport:udp
+2025-07-25 23:18:56,931 TRACE [default] [bool liveStream::base::Config::ParseDirectory(const Json::Value&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:157] ParseDirectory path:../config/publish/heart.com.json
+2025-07-25 23:18:56,931 TRACE [default] [bool liveStream::base::Config::ParseDirectory(const Json::Value&)] [/home/yaoran/gitpro/liveStream-study/src/base/Config.cpp:159] ret:-1 errno:2
+2025-07-27 16:02:09,023 INFO [default] Hello, world!
+2025-07-27 16:02:09,023 DEBUG [default] load config file:../config/config.json
+2025-07-27 16:02:09,023 DEBUG [default] config file : ../config/config.json
+2025-07-27 16:02:09,023 INFO [default] service info addr:0.0.0.0 port:1935 protocol:rtmp transport:tcp
+2025-07-27 16:02:09,023 INFO [default] service info addr:0.0.0.0 port:8080 protocol:http transport:tcp
+2025-07-27 16:02:09,023 INFO [default] service info addr:0.0.0.0 port:8081 protocol:http transport:webrtc
+2025-07-27 16:02:09,023 INFO [default] service info addr:0.0.0.0 port:22000 protocol:webrtc transport:udp
+2025-07-27 16:02:09,023 TRACE [default] ParseDirectory path:../config/publish/heart.com.json
+2025-07-27 16:02:09,024 TRACE [default] ret:0 errno:2 errmsg : No such file or directory
+2025-07-27 16:02:09,024 DEBUG [default] parse domain file:../config/publish/heart.com.json
+2025-07-27 16:02:09,024 DEBUG [default] domain file : ../config/publish/heart.com.json
+2025-07-27 16:02:09,024 INFO [default] app name:live max_buffer:1000 content_latency:3000 stream_idle_time:30000 stream_timeout_time:30000 rtmp_support:1 flv_support:1 hls_support:1

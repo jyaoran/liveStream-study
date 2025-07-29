@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-07-21 16:28:14
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-25 16:20:42
+ * @LastEditTime: 2025-07-30 01:47:08
  * @FilePath: /liveStream-study/src/mmedia/rtmp/RtmpContext.cpp
  * @Description:
  * @
@@ -42,29 +42,25 @@ int32_t RtmpContext::Parse(MsgBuffer &buf)
             // 客户端可以发送连接了
             if (is_client_)
             {
-                RTMP_TRACE << "rtmp client send connect";
                 SendConnect();
             }
             if (buf.ReadableBytes() > 0)
             {
-                RTMP_TRACE << "rtmp handshake continue";
                 return Parse(buf); // 继续解析，到kRtmpMessage解析
             }
         }
         else if (ret == -1)
         {
             RTMP_TRACE << "rtmp handshake error!";
-            // RTMP_ERROR << "rtmp handshake error!";
         }
         else if (ret == 2) // 中间状态.收到了s1s2s0
         {
-            RTMP_TRACE << "rtmp handshake doneing";
             state_ = kRtmpWatingDone;
         }
     }
     else if (state_ == kRtmpMessage)
     {
-        RTMP_TRACE << "rtmp message parse";
+        // RTMP_TRACE << "rtmp message parse";
         auto r = ParseMessage(buf);
         // 解析完成后剩下的数据统计
         last_left_ = buf.ReadableBytes();
@@ -666,7 +662,7 @@ void liveStream::mm::RtmpContext::SendBytesRecv()
         // ack_size_ 是int32_t类型
         header->msg_len = BytesWriter::WriteUint32T(body, in_bytes_);
         packet->SetPacketSize(header->msg_len);
-        // RTMP_DEBUG << "send band width:" << ack_size_ << " to host:" << connection_->getPeerAddress().toIpPort();
+        RTMP_DEBUG << "send band width:" << ack_size_ << " to host:" << connection_->getPeerAddress().toIpPort();
         PushOutQueue(std::move(packet)); // 加入需要build包的数据队列中，等待build，然后send
         in_bytes_ = 0;
     }

@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-07-10 22:29:04
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-21 22:39:26
+ * @LastEditTime: 2025-07-29 16:25:50
  * @FilePath: /liveStream-study/src/network/net/tests/SocketOptTest.cpp
  * @Description:
  * @
@@ -28,7 +28,7 @@ void testClient()
     
     // InetAddress serverAddr("127.0.0.1:34444");
     std::string ip = "127.0.0.1";
-    std::string port = "34444";
+    uint16_t port = 34444;
 
     InetAddress serverAddr(ip, port);
     LOG(INFO) << "\n ip: " << serverAddr.getAddr() << ", "

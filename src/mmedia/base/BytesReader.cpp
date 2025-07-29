@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-07-21 12:24:08
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-21 12:58:07
+ * @LastEditTime: 2025-07-29 17:59:48
  * @FilePath: /liveStream-study/src/mmedia/base/BytesReader.cpp
  * @Description:
  * @
@@ -25,7 +25,10 @@ uint64_t BytesReader::ReadUint64T(const char *data)
 {
     uint64_t in = *((uint64_t *)data); // 将输入数据解释为uint64_t
     uint64_t res = __bswap_64(in);     // 使用__bswap_64将大端存储的uint64_t转换为小端
-    return res;                        // 直接返回转换后的uint64_t值，而非double
+    double value;
+    memcpy(&value, &res, sizeof(double));
+    
+    return value;                        
 }
 
 // 读取一个大端存储的uint32_t值，并将其转换为小端存储

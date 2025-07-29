@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-06-14 21:43:46
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-10 23:37:46
+ * @LastEditTime: 2025-07-29 16:25:00
  * @FilePath: /liveStream-study/src/network/base/InetAddress.h
  * @Description:
  * @
@@ -28,7 +28,7 @@ namespace liveStream
             using ptr = std::shared_ptr<InetAddress>;
             
             InetAddress() = default;
-            InetAddress(const std::string &ip, std::string &port, bool ipv6 = false);
+            InetAddress(const std::string &ip, uint16_t port, bool ipv6 = false);
             InetAddress(const std::string &host, bool is_ipv6 = false);
             ~InetAddress() = default;
 

@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-06-20 17:25:00
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-06-25 16:06:11
+ * @LastEditTime: 2025-07-30 01:03:15
  * @FilePath: /liveStream-study/src/base/TaskManager.h
  * @Description:
  * @
@@ -52,10 +52,10 @@ namespace liveStream
         class TaskManager : public NonCopyable 
         {
         private:
-            TaskManager() = default;
             
         public:
             ~TaskManager();
+            TaskManager() = default;
             
             static TaskManager* Instance();
             bool addTask(liveStream::base::Task::ptr &task);
@@ -67,5 +67,6 @@ namespace liveStream
             static std::mutex m_TaskManagerMutex;
             static TaskManager* m_pTaskManagerInstance;
         };
+        // #define sTaskMgr liveStream::base::TaskManager::Instance()
     }
 }

@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-07-10 19:04:19
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-10 22:53:59
+ * @LastEditTime: 2025-07-29 16:26:52
  * @FilePath: /liveStream-study/src/network/net/tests/InetAddressTest.cpp
  * @Description:
  * @
@@ -31,7 +31,7 @@ int main(int argc, char const *argv[])
             << "loop: " << addr.isLoopbackIp();
 
     host = "192.168.1.1";
-    std::string port  = "8080";
+    uint16_t port  = 8080;
     liveStream::network::InetAddress addr1(host, port);
     LOG(INFO) << "host: " << host << ":" << port;
     LOG(INFO) << "\n ip: " << addr1.getAddr() << ", "

@@ -80,8 +80,8 @@ namespace liveStream
             void setActiveCallback(const ActiveCallback& cb);
             void setActiveCallback(ActiveCallback&& cb);
 
-            void activa();
-            void deactivate();
+            void Active();
+            void deactive();
 
             virtual void forceClose() = 0; // 强制关闭连接
 
@@ -101,11 +101,11 @@ namespace liveStream
             auto it = m_contexts.find(contextType);
             if (it!= m_contexts.end())
             {
-                LOG(INFO) << "Get context type success";
+                // LOG(INFO) << "Get context type success";
                 return std::static_pointer_cast<T>(it->second);
             }
 
-            LOG(INFO) << "New context shared_ptr for type!"; 
+            // LOG(INFO) << "New context shared_ptr for type!"; 
             return std::shared_ptr<T>();
         }
     } // namespace network

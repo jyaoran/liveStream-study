@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-06-23 14:57:33
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-23 16:04:47
+ * @LastEditTime: 2025-07-30 01:34:04
  * @FilePath: /liveStream-study/src/network/net/EventLoop.cpp
  * @Description: 
  * @
@@ -86,12 +86,13 @@ void liveStream::network::EventLoop::loop()
                 
                 if (activEvent.events &(EPOLLIN | EPOLLPRI | EPOLLRDHUP))
                 {
-                    // LOG(INFO) << "fd = " << activEvent.data.fd << " read event";
+                    // LOG(TRACE) << "fd = " << activEvent.data.fd << " read event.";
                     event->onRead();
                 }
                 
                 if (activEvent.events & EPOLLOUT)
                 {
+                    // LOG(TRACE) << "fd = " << activEvent.data.fd << " write event.";
                     event->onWrite();
                 }
             }

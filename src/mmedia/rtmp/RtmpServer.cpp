@@ -2,7 +2,7 @@
  * @Author: jiangshan yaoranyaoran2015@outlook.com
  * @Date: 2025-07-21 16:26:50
  * @LastEditors: jiangshan yaoranyaoran2015@outlook.com
- * @LastEditTime: 2025-07-25 16:00:44
+ * @LastEditTime: 2025-07-30 01:05:52
  * @FilePath: /liveStream-study/src/mmedia/rtmp/RtmpServer.cpp
  * @Description:
  * @
@@ -35,6 +35,7 @@ void RtmpServer::Start()
     TcpServer::setWriteCompleteCallback(std::bind(&RtmpServer::OnWriteComplete, this, std::placeholders::_1));
     TcpServer::setMessageCallback(std::bind(&RtmpServer::OnMessage, this, std::placeholders::_1, std::placeholders::_2));
     TcpServer::Start();
+    RTMP_DEBUG << "RtmpServer started.";
 }
 void RtmpServer::Stop()
 {
@@ -64,12 +65,11 @@ void RtmpServer::OnConnectionDestroy(const TcpConnectionPtr &conn)
 }
 void RtmpServer::OnMessage(const TcpConnectionPtr &conn, MsgBuffer &buf)
 {
+    // RTMP_DEBUG << "host: " << conn->getPeerAddress().toIpPort() << " recv data: " << buf.ReadableBytes();
     RtmpContextPtr shake = conn->getContext<RtmpContext>(kRtmpContext);
-    // RtmpHandShakePtr shake = conn->GetContext<RtmpHandShake>(kRtmpContext);
     if (shake)
     {
 
-        // int ret = shakehand->HandShake(buf); // 开始握手
         int ret = shake->Parse(buf); // 开始解析，握手，命令或消息
         if (ret == 0)                // 0握手成功
         {
